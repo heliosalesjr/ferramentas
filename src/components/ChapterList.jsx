@@ -37,10 +37,10 @@ const ChapterList = () => {
     return (
       <div id="chapter-list" className="w-full max-w-5xl mx-auto p-6">
         {/* Título e introdução */}
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">
+        <h1 className="text-4xl font-semibold text-center mb-4 bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
           Biblioteca de Capítulos
         </h1>
-        <p className="text-lg text-gray-600 text-center mb-8">
+        <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto pb-4">
           Explore os capítulos abaixo e clique para visualizar ou baixar o conteúdo. 
           Cada história traz um novo universo para você descobrir!
         </p>
@@ -57,7 +57,7 @@ const ChapterList = () => {
               onClick={() => togglePdf(chapter.id)}
             >
               <h2 
-                className="text-lg font-semibold text-slate-700 uppercase ml-4"
+                className="text-lg font-semibold uppercase ml-4"
                
               >
                 Capítulo {chapter.id}: {chapter.title}
