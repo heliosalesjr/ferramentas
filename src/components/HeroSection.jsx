@@ -1,17 +1,16 @@
+"use client"
+
 import { ArrowDown } from "lucide-react"
 
 export default function HeroSection() {
   return (
-    <div className="flex justify-center items-center min-h-screen w-full py-10">
-      <div className="flex h-[80vh] w-full max-w-9xl flex-col md:flex-row shadow-lg rounded-lg overflow-hidden">
+    <div className="flex justify-center items-center min-h-screen w-full py-4 sm:py-10 px-4 sm:px-6">
+      <div className="flex h-auto sm:h-[80vh] w-full max-w-9xl flex-col md:flex-row shadow-lg rounded-lg overflow-hidden">
         {/* Diagonal split with image section */}
-        <div className="relative w-full md:w-1/2 bg-white">
-          {/* Logo */}
-         
-
+        <div className="relative w-full h-[40vh] sm:h-auto md:w-1/2 bg-white">
           {/* Main image with diagonal cut */}
           <div className="relative h-full w-full">
-            {/* Imagem com formato trapezoidal */}
+            {/* Imagem com formato trapezoidal - mantido exatamente como estava */}
             <div
               className="h-full w-full overflow-hidden"
               style={{
@@ -23,7 +22,7 @@ export default function HeroSection() {
                 alt="Homem sorrindo"
                 className="h-full w-full object-cover"
                 style={{
-                  filter: "brightness(0.8)", // Escurece levemente a imagem para manter o efeito visual
+                  filter: "brightness(.8)", // Escurece levemente a imagem para manter o efeito visual
                 }}
               />
             </div>
@@ -31,49 +30,51 @@ export default function HeroSection() {
         </div>
 
         {/* Content section */}
-        <div className="flex w-full flex-col justify-center bg-white p-8 md:w-1/2 md:p-16">
-          <div className="max-w-lg">
-            {/* Close button */}
-            <div className="absolute right-8 top-8">
-              
-            </div>
-
+        <div className="flex w-full flex-col justify-center bg-white p-6 sm:p-8 md:p-12 lg:p-16 md:w-1/2">
+          <div className="w-full md:max-w-lg ">
             {/* Content */}
-            <h1 className="mb-6 text-5xl font-bold bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
-            Exercícios Extras
+            <h1 className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl font-semibold bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
+              Exercícios Extras
             </h1>
 
-            <p className="mb-6 text-lg text-gray-700">
+            <p className="mb-3 sm:mb-6 text-base sm:text-lg text-slate-700">
               Aqui você consegue acessar nossos exercícios extras de matemática.
             </p>
 
-            <p className="mb-2 text-lg text-gray-700">
+            <p className="mb-3 sm:mb-6 text-base sm:text-lg text-slate-700">
               Você pode acessar os PDFs por capítulo, podendo baixar ou abrir pelo próprio site.
             </p>
 
-            <p className="mb-6 text-lg text-gray-700">As atividades extras podem potencializar suas aulas com conteúdos que vão além do que já temos nos livros.</p>
+            <p className="mb-6 text-base sm:text-lg text-slate-700">
+              As atividades extras podem potencializar suas aulas com conteúdos que vão além do que já temos nos livros.
+            </p>
 
-            
-
-            {/* Button */}
-            <button
+            {/* Button - centralizado em mobile, sem ocupar toda a largura */}
+            <div className="flex justify-center sm:justify-start">
+              <button
                 onClick={() => {
-                    document.getElementById("chapter-list")?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById("chapter-list")?.scrollIntoView({ behavior: "smooth" })
                 }}
-                className="group relative flex items-center rounded-full bg-[#0F172A] px-6 py-3 text-white 
+                className="group relative flex items-center rounded-full bg-[#0F172A] px-4 sm:px-6 py-2.5 sm:py-3 text-white 
                     transition-all duration-300 ease-out hover:bg-[#1E293B] hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <span className="mr-2 sm:mr-4 text-sm sm:text-base font-medium uppercase">Acesse o Conteúdo</span>
+                <span
+                  className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#00E676] 
+                    transition-all duration-300 ease-out group-hover:bg-[#00C764]"
                 >
-                <span className="mr-4 font-medium uppercase">Acesse o Conteúdo</span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#00E676] 
-                    transition-all duration-300 ease-out group-hover:bg-[#00C764]">
-                    <ArrowDown size={20} className="text-[#0F172A] transition-all duration-300 ease-out group-hover:rotate-360" />
+                  <ArrowDown
+                    size={18}
+                    className="text-[#0F172A] transition-all duration-300 ease-out group-hover:rotate-360"
+                  />
                 </span>
-            </button>
-
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
 }
+
 

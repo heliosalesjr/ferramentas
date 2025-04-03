@@ -1,5 +1,6 @@
 import BentoGrid from "./components/BentoGrid"
 import ChapterList from "./components/ChapterList"
+import Footer from "./components/Footer"
 import HeroSection from "./components/HeroSection"
 import Navbar from "./components/Navbar"
 import ProgressBar from "./components/ProgressBar"
@@ -14,6 +15,7 @@ function App() {
       <ProgressBar />
       <HeroSection />
       <ChapterList />
+      <Footer />
     </>
   )
 }

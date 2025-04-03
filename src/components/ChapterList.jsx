@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { FaDownload, FaFilePdf } from "react-icons/fa";
 
 const chapters = [
-  { id: 1, title: "O Começo da Jornada", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 2, title: "O Despertar da Força", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 3, title: "A Revolução dos Gatos", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 4, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 5, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 6, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 7, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 8, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 9, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 10, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 11, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 12, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 13, title: "Mistérios do Espaço", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 1, title: "Ter ou Ser? Eis a Questão...", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 2, title: "Jura que posso gastar mais? Juros!", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 3, title: "Um doce projeto familiar", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 4, title: "Quanto mais venda, melhor?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 5, title: "Como escolher o preço certo?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 6, title: "Tornando a Vida mais doce pouco a pouco", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 7, title: "Qual é meu sonho?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 8, title: "Planejando para chegar lá", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 9, title: "Quando chegarei lá?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 10, title: "Realizando sonhos numa curva", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 11, title: "Aprendendo a lidar com dinheiro", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 12, title: "Capítulo extra", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
+  { id: 13, title: "Outro capítulo extra", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
   
 ];
 
@@ -50,13 +50,16 @@ const ChapterList = () => {
           <div key={chapter.id} className="mb-8">
             {/* ITEM DA LISTA */}
             <div
-              className={`flex items-center justify-between p-6 border border-slate-300 rounded-lg shadow-xl 
+              className={`flex items-center justify-between p-8 border border-slate-300 rounded-lg shadow-xl 
                 transition-all cursor-pointer ${
                   openPdf === chapter.id ? "bg-green-500 text-white" : "bg-white hover:bg-gray-50"
                 }`}
               onClick={() => togglePdf(chapter.id)}
             >
-              <h2 className="text-lg font-semibold">
+              <h2 
+                className="text-lg font-semibold text-slate-700 uppercase ml-4"
+               
+              >
                 Capítulo {chapter.id}: {chapter.title}
               </h2>
               <div className="flex gap-4">
@@ -76,7 +79,7 @@ const ChapterList = () => {
                     e.stopPropagation();
                     togglePdf(chapter.id);
                   }}
-                  className={`transition-all ${
+                  className={`transition-all mr-4 ${
                     openPdf === chapter.id ? "text-white" : "text-red-400 hover:text-red-800"
                   }`}
                 >
