@@ -18,11 +18,11 @@ export default function HeroSection() {
               }}
             >
               <img
-                src="/assets/images/1.png"
+                src="/assets/images/hey2.png"
                 alt="Homem sorrindo"
                 className="h-full w-full object-cover"
                 style={{
-                  filter: "brightness(.8)", // Escurece levemente a imagem para manter o efeito visual
+                  filter: "brightness(1.2)", // Escurece levemente a imagem para manter o efeito visual
                 }}
               />
             </div>
