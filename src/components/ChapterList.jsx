@@ -28,7 +28,7 @@ const ChapterList = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-6">
+    <div className="w-full max-w-5xl mx-auto p-6" id="chapter-list">
       <h1 className="text-4xl font-semibold text-center mb-4 bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
         Biblioteca de Capítulos
       </h1>
