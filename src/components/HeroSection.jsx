@@ -4,7 +4,7 @@ import { ArrowDown } from "lucide-react"
 
 export default function HeroSection() {
   return (
-    <div className="flex justify-center items-center min-h-screen w-full py-4 sm:py-10 px-4 sm:px-6">
+    <div className="flex justify-center items-center min-h-[60vh] w-full py-4 sm:py-10 px-4 sm:px-6">
       <div className="flex h-auto sm:h-[80vh] w-full max-w-9xl flex-col md:flex-row shadow-lg rounded-lg overflow-hidden">
         {/* Diagonal split with image section */}
         <div className="relative w-full h-[40vh] sm:h-auto md:w-1/2 bg-white">
@@ -39,16 +39,16 @@ export default function HeroSection() {
 
             <p className="mb-3 sm:mb-6 text-base sm:text-lg text-slate-700">
               Aqui você consegue acessar nossos exercícios extras de matemática.
-            </p>
-
-            <p className="mb-3 sm:mb-6 text-base sm:text-lg text-slate-700">
+            
               Você pode acessar os PDFs por capítulo, podendo baixar ou abrir pelo próprio site.
             </p>
 
-            <p className="mb-6 text-base sm:text-lg text-slate-700">
+            <p className="mb-3 text-base sm:text-lg text-slate-700">
               As atividades extras podem potencializar suas aulas com conteúdos que vão além do que já temos nos livros.
             </p>
-
+            <p className="mb-6 text-base sm:text-lg text-slate-700">
+            Você pode ver o arquivo do Educador, que tem as respostas, mas também pode imprimir o arquivo do Estudante, caso queira utilizá-lo diretamente com sua turma.
+            </p>
             {/* Button - centralizado em mobile, sem ocupar toda a largura */}
             <div className="flex justify-center sm:justify-start">
               <button

@@ -1,109 +1,112 @@
 import React, { useState } from "react";
-import { FaDownload, FaFilePdf } from "react-icons/fa";
+import { FaDownload, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 
 const chapters = [
-  { id: 1, title: "Ter ou Ser? Eis a Questão...", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 2, title: "Jura que posso gastar mais? Juros!", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 3, title: "Um doce projeto familiar", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 4, title: "Quanto mais venda, melhor?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 5, title: "Como escolher o preço certo?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 6, title: "Tornando a Vida mais doce pouco a pouco", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 7, title: "Qual é meu sonho?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 8, title: "Planejando para chegar lá", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 9, title: "Quando chegarei lá?", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 10, title: "Realizando sonhos numa curva", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 11, title: "Aprendendo a lidar com dinheiro", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 12, title: "Capítulo extra", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  { id: 13, title: "Outro capítulo extra", pdfPath: "/assets/pdfs/cap_1_1a_serie.pdf" },
-  
+  { id: 1, title: "Ter ou Ser? Eis a Questão...", teacherPdf: "/assets/pdfs/Capitulo_01_ALD_8o_ano_Educador.pdf", studentPdf: "/assets/pdfs/Capitulo 01_ALD_8o_ano_Estudante.pdf" },
+  { id: 2, title: "Jura que posso gastar mais? Juros!", teacherPdf: "/assets/pdfs/Capitulo_02_ALD_8o_ano_Educador.pdf", studentPdf: "/assets/pdfs/Capitulo_02_ALD_8o_ano_Estudante.pdf" },
+  // ... outros capítulos
 ];
 
 const ChapterList = () => {
-    const [openPdf, setOpenPdf] = useState(null);
-  
-    const togglePdf = (id) => {
-      setOpenPdf(openPdf === id ? null : id);
-    };
-  
-    const downloadPdf = (path) => {
-      const link = document.createElement("a");
-      link.href = path;
-      link.download = path.split("/").pop();
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-  
-    return (
-      <div id="chapter-list" className="w-full max-w-5xl mx-auto p-6">
-        {/* Título e introdução */}
-        <h1 className="text-4xl font-semibold text-center mb-4 bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
-          Biblioteca de Capítulos
-        </h1>
-        <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto pb-4">
-          Explore os capítulos abaixo e clique para visualizar ou baixar o conteúdo. 
-          Cada história traz um novo universo para você descobrir!
-        </p>
-  
-        {/* Lista de capítulos */}
-        {chapters.map((chapter) => (
-          <div key={chapter.id} className="mb-8">
-            {/* ITEM DA LISTA */}
-            <div
-              className={`flex items-center justify-between p-8 border border-slate-300 rounded-lg shadow-xl 
-                transition-all cursor-pointer ${
-                  openPdf === chapter.id ? "bg-green-500 text-white" : "bg-white hover:bg-gray-50"
-                }`}
-              onClick={() => togglePdf(chapter.id)}
-            >
-              <h2 
-                className="text-lg font-semibold uppercase ml-4"
-               
-              >
-                Capítulo {chapter.id}: {chapter.title}
-              </h2>
-              <div className="flex gap-4">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    downloadPdf(chapter.pdfPath);
-                  }}
-                  className={`transition-all ${
-                    openPdf === chapter.id ? "text-white" : "text-blue-400 hover:text-blue-800"
-                  }`}
-                >
-                  <FaDownload size={30} />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    togglePdf(chapter.id);
-                  }}
-                  className={`transition-all mr-4 ${
-                    openPdf === chapter.id ? "text-white" : "text-red-400 hover:text-red-800"
-                  }`}
-                >
-                  <FaFilePdf size={30} />
-                </button>
-              </div>
-            </div>
-  
-            {/* CONTAINER DO PDF */}
-            {openPdf === chapter.id && (
-              <div className="mt-4 border p-4 rounded-lg bg-green-500 h-[80vh] flex justify-center">
-                <embed
-                  src={chapter.pdfPath}
-                  type="application/pdf"
-                  width="100%"
-                  height="100%"
-                  className="border rounded-lg"
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    );
+  const [openPdf, setOpenPdf] = useState({ id: null, type: null });
+
+  const togglePdf = (id, type) => {
+    if (openPdf.id === id && openPdf.type === type) {
+      setOpenPdf({ id: null, type: null });
+    } else {
+      setOpenPdf({ id, type });
+    }
   };
+
+  const downloadPdf = (path) => {
+    const link = document.createElement("a");
+    link.href = path;
+    link.download = path.split("/").pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <div className="w-full max-w-5xl mx-auto p-6">
+      <h1 className="text-4xl font-semibold text-center mb-4 bg-gradient-to-br from-green-700 to-green-500 text-transparent bg-clip-text">
+        Biblioteca de Capítulos
+      </h1>
+      <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto pb-4">
+        Explore os capítulos abaixo e visualize / baixe os conteúdos do Livro do Professor ou do Caderno do Estudante.
+      </p>
+
+      {chapters.map((chapter) => (
+        <div key={chapter.id} className="mb-10">
+          <div className="flex flex-col gap-4 p-8 border border-slate-300 rounded-lg shadow-xl bg-white hover:bg-gray-50 transition-all">
+            <h2 className="text-lg font-semibold uppercase text-gray-800">
+              Capítulo {chapter.id}: {chapter.title}
+            </h2>
+
+            <div className="flex flex-wrap gap-4 mt-2 w-full">
+              {/* Botões do PROFESSOR */}
+              <button
+                onClick={() => togglePdf(chapter.id, "teacher")}
+                className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg justify-center border font-medium transition-all ${
+                  openPdf.id === chapter.id && openPdf.type === "teacher"
+                    ? "bg-green-600 text-white"
+                    : "bg-green-100 text-green-700 hover:bg-green-200"
+                }`}
+              >
+                <FaChalkboardTeacher />
+                Material do Professor
+              </button>
+
+              <button
+                onClick={() => downloadPdf(chapter.teacherPdf)}
+                className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg border justify-center border-green-600 text-green-700 bg-white hover:bg-green-50 font-medium transition-all"
+              >
+                <FaDownload />
+                Baixar PDF
+              </button>
+
+              {/* Botões do ESTUDANTE */}
+              <button
+                onClick={() => togglePdf(chapter.id, "student")}
+                className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border font-medium transition-all ${
+                  openPdf.id === chapter.id && openPdf.type === "student"
+                    ? "bg-blue-600 text-white"
+                    : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                }`}
+              >
+                <FaUserGraduate />
+                Material do Estudante
+              </button>
+
+              <button
+                onClick={() => downloadPdf(chapter.studentPdf)}
+                className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border border-blue-600 text-blue-700 bg-white hover:bg-blue-50 font-medium transition-all"
+              >
+                <FaDownload />
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+
+          {openPdf.id === chapter.id && (
+            <div className="mt-4 border p-4 rounded-lg bg-green-50 h-[80vh] flex justify-center">
+              <embed
+                src={
+                  openPdf.type === "teacher"
+                    ? chapter.teacherPdf
+                    : chapter.studentPdf
+                }
+                type="application/pdf"
+                width="100%"
+                height="100%"
+                className="border rounded-lg"
+              />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default ChapterList;
