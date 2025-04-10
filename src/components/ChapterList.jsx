@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useInView from "../hooks/useInView";
 import { FaDownload, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 
 const chapters = [
@@ -36,75 +37,85 @@ const ChapterList = () => {
         Explore os capítulos abaixo e visualize / baixe os conteúdos do Livro do Professor ou do Caderno do Estudante.
       </p>
 
-      {chapters.map((chapter) => (
-        <div key={chapter.id} className="mb-10">
-          <div className="flex flex-col gap-4 p-8 border border-slate-300 rounded-lg shadow-xl bg-white hover:bg-gray-50 transition-all">
-            <h2 className="text-lg font-semibold uppercase text-gray-800">
-              Capítulo {chapter.id}: {chapter.title}
-            </h2>
+      {chapters.map((chapter) => {
+        const [ref, isVisible] = useInView({ threshold: 0.1 });
 
-            <div className="flex flex-wrap gap-4 mt-2 w-full">
-              {/* Botões do PROFESSOR */}
-              <button
-                onClick={() => togglePdf(chapter.id, "teacher")}
-                className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg justify-center border font-medium transition-all ${
-                  openPdf.id === chapter.id && openPdf.type === "teacher"
-                    ? "bg-green-600 text-white"
-                    : "bg-green-100 text-green-700 hover:bg-green-200"
-                }`}
-              >
-                <FaChalkboardTeacher />
-                Material do Professor
-              </button>
+        return (
+          <div
+            key={chapter.id}
+            ref={ref}
+            className={`mb-10 transition-all duration-1000 ease-out transform ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            }`}
+          >
+            <div className="flex flex-col gap-4 p-8 border border-slate-300 rounded-lg shadow-xl bg-white hover:bg-gray-50 transition-all">
+              <h2 className="text-lg font-semibold uppercase text-gray-800">
+                Capítulo {chapter.id}: {chapter.title}
+              </h2>
 
-              <button
-                onClick={() => downloadPdf(chapter.teacherPdf)}
-                className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg border justify-center border-green-600 text-green-700 bg-white hover:bg-green-50 font-medium transition-all"
-              >
-                <FaDownload />
-                Baixar PDF
-              </button>
+              <div className="flex flex-wrap gap-4 mt-2 w-full">
+                {/* Botões do PROFESSOR */}
+                <button
+                  onClick={() => togglePdf(chapter.id, "teacher")}
+                  className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg justify-center border font-medium transition-all ${
+                    openPdf.id === chapter.id && openPdf.type === "teacher"
+                      ? "bg-green-600 text-white"
+                      : "bg-green-100 text-green-700 hover:bg-green-200"
+                  }`}
+                >
+                  <FaChalkboardTeacher />
+                  Material do Professor
+                </button>
 
-              {/* Botões do ESTUDANTE */}
-              <button
-                onClick={() => togglePdf(chapter.id, "student")}
-                className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border font-medium transition-all ${
-                  openPdf.id === chapter.id && openPdf.type === "student"
-                    ? "bg-blue-600 text-white"
-                    : "bg-blue-100 text-blue-700 hover:bg-blue-200"
-                }`}
-              >
-                <FaUserGraduate />
-                Material do Estudante
-              </button>
+                <button
+                  onClick={() => downloadPdf(chapter.teacherPdf)}
+                  className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 rounded-lg border justify-center border-green-600 text-green-700 bg-white hover:bg-green-50 font-medium transition-all"
+                >
+                  <FaDownload />
+                  Baixar PDF
+                </button>
 
-              <button
-                onClick={() => downloadPdf(chapter.studentPdf)}
-                className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border border-blue-600 text-blue-700 bg-white hover:bg-blue-50 font-medium transition-all"
-              >
-                <FaDownload />
-                Baixar PDF
-              </button>
+                {/* Botões do ESTUDANTE */}
+                <button
+                  onClick={() => togglePdf(chapter.id, "student")}
+                  className={`flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border font-medium transition-all ${
+                    openPdf.id === chapter.id && openPdf.type === "student"
+                      ? "bg-blue-600 text-white"
+                      : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  }`}
+                >
+                  <FaUserGraduate />
+                  Material do Estudante
+                </button>
+
+                <button
+                  onClick={() => downloadPdf(chapter.studentPdf)}
+                  className="flex-1 min-w-[200px] flex items-center gap-2 px-4 py-2 justify-center rounded-lg border border-blue-600 text-blue-700 bg-white hover:bg-blue-50 font-medium transition-all"
+                >
+                  <FaDownload />
+                  Baixar PDF
+                </button>
+              </div>
             </div>
+
+            {openPdf.id === chapter.id && (
+              <div className="mt-4 border p-4 rounded-lg bg-green-50 h-[80vh] flex justify-center">
+                <embed
+                  src={
+                    openPdf.type === "teacher"
+                      ? chapter.teacherPdf
+                      : chapter.studentPdf
+                  }
+                  type="application/pdf"
+                  width="100%"
+                  height="100%"
+                  className="border rounded-lg"
+                />
+              </div>
+            )}
           </div>
-
-          {openPdf.id === chapter.id && (
-            <div className="mt-4 border p-4 rounded-lg bg-green-50 h-[80vh] flex justify-center">
-              <embed
-                src={
-                  openPdf.type === "teacher"
-                    ? chapter.teacherPdf
-                    : chapter.studentPdf
-                }
-                type="application/pdf"
-                width="100%"
-                height="100%"
-                className="border rounded-lg"
-              />
-            </div>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
