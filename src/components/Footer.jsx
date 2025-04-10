@@ -41,7 +41,7 @@ function Footer() {
 
       {/* Texts */}
       <div className="text-center order-3 md:order-2 w-full md:w-auto md:self-end">
-        <p className="text-white font-bold uppercase tracking-[0.5em] mb-4 md:pb-4">Conteúdo com propósito</p>
+        <p className="text-white font-bold uppercase tracking-[0.5em] mb-4 md:pb-12">Conteúdo com propósito</p>
         <p className="text-slate-200 text-sm">2025 © Todos os direitos reservados</p>
       </div>
     </footer>
